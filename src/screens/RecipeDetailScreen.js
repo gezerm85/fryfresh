@@ -19,7 +19,12 @@ export default function RecipeDetailScreen(props) {
     const [meal, setMeal] = useState(null);
     const [loading, setLoading] = useState(true);
 
+
     //test
+
+
+
+
     useEffect(()=>{
         getMealData(item.idMeal);
     },[])
