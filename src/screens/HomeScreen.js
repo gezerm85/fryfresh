@@ -36,6 +36,7 @@ export default function HomeScreen() {
     try {
       const response = await axios.get(
         "https://themealdb.com/api/json/v1/1/categories.php"
+        //added
       );
       // console.log('got categories: ',response.data);
       if (response && response.data) {
