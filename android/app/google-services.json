@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "83538668242",
+    "project_id": "fryfresh-c938e",
+    "storage_bucket": "fryfresh-c938e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:83538668242:android:116356bd58d734fe311b0b",
+        "android_client_info": {
+          "package_name": "com.airfryer.fryfresh"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrTP36eXQ3ChSJj_QITeCha7Cc1uenpi4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
