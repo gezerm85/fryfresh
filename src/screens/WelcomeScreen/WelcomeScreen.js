@@ -4,8 +4,10 @@ import { StatusBar } from 'expo-status-bar'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import Animated, { useSharedValue, withSpring } from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
+import welcome from '../../assets/images/welcome.png'
 
-export default function WelcomeScreen() {
+const WelcomeScreen = () => {
+
 
     const ring1padding = useSharedValue(0);
     const ring2padding = useSharedValue(0);
@@ -27,7 +29,7 @@ export default function WelcomeScreen() {
       {/* logo image with rings */}
       <Animated.View className="bg-white/20 rounded-full" style={{padding: ring2padding}}>
         <Animated.View className="bg-white/20 rounded-full" style={{padding: ring1padding}}>
-            <Image source={require('../../assets/images/welcome.png')}
+            <Image source={welcome}
                 style={{width: hp(20), height: hp(20)}} />
         </Animated.View>
       </Animated.View>
@@ -44,3 +46,5 @@ export default function WelcomeScreen() {
     </View>
   )
 }
+
+export default WelcomeScreen
