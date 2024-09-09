@@ -2,9 +2,7 @@ import {
     View,
     Text,
     ScrollView,
-    Image,
     TextInput,
-    SafeAreaView,
   } from "react-native";
   import React, { useEffect, useState } from "react";
   import { StatusBar } from "expo-status-bar";
@@ -72,10 +70,10 @@ const HomeScreen = () => {
         contentContainerStyle={{ paddingBottom: 50 }}
         className="space-y-6 pt-14"
       >
-        {/* avatar and bell icon */}
+        {/*  bell icon */}
         <View className="mx-4 flex-row justify-end items-center mb-2">
         <TouchableOpacity onPress={()=> navigation.navigate('Favorite')}>
-        <Icon name="bookmark" size={30} color="#000" />
+        <Icon name="bookmark" size={36} color="#525252" />
         </TouchableOpacity>
         </View>
 

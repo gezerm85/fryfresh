@@ -3,8 +3,8 @@ import React from 'react'
 
 const FavoriteScreen = () => {
   return (
-    <View>
-      <Text>FavoriteScreen</Text>
+    <View className="flex-1 items-center justify-center ">
+      <Text >FavoriteScreen</Text>
     </View>
   )
 }
