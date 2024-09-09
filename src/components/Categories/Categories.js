@@ -1,11 +1,12 @@
-import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity, Image, StyleSheet } from 'react-native'
 import React from 'react'
-import {categoryData} from '../constants'
+import {categoryData} from '../../constants'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import Animated, { FadeInDown } from 'react-native-reanimated';
-import { CachedImage } from '../helpers/image';
+import { CachedImage } from '../../helpers/image';
 
-export default function Categories({categories, activeCategory, handleChangeCategory}) {
+
+const Categories = ({categories, activeCategory, handleChangeCategory}) => {
   return (
     <Animated.View entering={FadeInDown.duration(500).springify()}>
       <ScrollView
@@ -36,7 +37,7 @@ export default function Categories({categories, activeCategory, handleChangeCate
                                 className="rounded-full"
                             />
                         </View>
-                        <Text className="text-neutral-600" style={{fontSize: hp(1.6)}}>
+                        <Text className="text-neutral-600" style={{fontSize: hp(1.6), fontFamily: "Poppins-Medium"}}>
                             {cat.strCategory}
                         </Text>
                     </TouchableOpacity>
@@ -47,3 +48,7 @@ export default function Categories({categories, activeCategory, handleChangeCate
     </Animated.View>
   )
 }
+
+export default Categories
+
+const styles = StyleSheet.create({})
