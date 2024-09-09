@@ -36,10 +36,10 @@ const WelcomeScreen = () => {
 
       {/* title and punchline */}
       <View className="flex items-center space-y-2">
-        <Text style={{fontSize: hp(7)}} className="font-bold text-white tracking-widest">
+        <Text style={{fontSize: hp(7), fontFamily: 'Poppins-Bold'}} className=" text-white tracking-widest">
             Foody
         </Text>
-        <Text style={{fontSize: hp(2)}} className="font-medium text-white tracking-widest">
+        <Text style={{fontSize: hp(2), fontFamily: 'Poppins-Medium'}} className=" text-white tracking-widest">
             Food is always right
         </Text>
       </View>
