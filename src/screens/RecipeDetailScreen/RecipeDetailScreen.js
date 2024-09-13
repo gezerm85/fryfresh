@@ -17,38 +17,11 @@ const RecipeDetailScreen = (props) => {
   let item = props.route.params;
   const [isFavourite, setIsFavourite] = useState(false);
   const navigation = useNavigation();
-  const [meal, setMeal] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false); //sonradan verinin geldiği state e bağlanacak
 
-  useEffect(() => {
-    getMealData(item.idMeal);
-  }, []);
-
-  const getMealData = async (id) => {
-    try {
-      const response = await axios.get(
-        `https://themealdb.com/api/json/v1/1/lookup.php?i=${id}`
-      );
-      //   console.log('got meal data: ',response.data);
-      if (response && response.data) {
-        setMeal(response.data.meals[0]);
-        setLoading(false);
-      }
-    } catch (err) {
-      console.log("error: ", err.message);
-    }
-  };
-
-  const ingredientsIndexes = (meal) => {
-    if (!meal) return [];
-    let indexes = [];
-    for (let i = 1; i <= 20; i++) {
-      if (meal["strIngredient" + i]) {
-        indexes.push(i);
-      }
-    }
-
-    return indexes;
+  const ingredientsIndexes = (item) => {
+    if (!item || !item.ingredients) return [];
+    return Object.values(item.ingredients);
   };
 
   const getYoutubeVideoId = (url) => {
@@ -58,6 +31,11 @@ const RecipeDetailScreen = (props) => {
       return match[1];
     }
     return null;
+  };
+
+  const instructionsIndexes = (item) => {
+    if (!item || !item.instructions) return [];
+    return Object.values(item.instructions);
   };
   return (
     <ScrollView
@@ -69,8 +47,8 @@ const RecipeDetailScreen = (props) => {
       {/* recipe image */}
       <View className="flex-row justify-center">
         <CachedImage
-          uri={item.strMealThumb}
-          sharedTransitionTag={item.strMeal}
+          uri={item.image}
+          sharedTransitionTag={item.image}
           style={{
             width: "100%",
             height: hp(50),
@@ -114,16 +92,16 @@ const RecipeDetailScreen = (props) => {
             className="space-y-2"
           >
             <Text
-              style={{ fontSize: hp(3), fontFamily: 'Poppins-Bold' }}
+              style={{ fontSize: hp(3), fontFamily: "Poppins-Bold" }}
               className=" flex-1 text-neutral-700"
             >
-              {meal?.strMeal}
+              {item?.name}
             </Text>
             <Text
-              style={{ fontSize: hp(2), fontFamily: 'Poppins-Medium' }}
+              style={{ fontSize: hp(2), fontFamily: "Poppins-Medium" }}
               className="flex-1 text-neutral-500"
             >
-              {meal?.strArea}
+              {item?.strArea}
             </Text>
           </Animated.View>
 
@@ -140,17 +118,21 @@ const RecipeDetailScreen = (props) => {
                 style={{ height: hp(6.5), width: hp(6.5) }}
                 className="bg-white rounded-full flex items-center justify-center"
               >
-                <Icon name="clock-time-three-outline" size={hp(5)}  color="#525252" />
+                <Icon
+                  name="clock-time-three-outline"
+                  size={hp(5)}
+                  color="#525252"
+                />
               </View>
               <View className="flex items-center py-2 space-y-1">
                 <Text
-                  style={{ fontSize: hp(2), fontFamily: 'Poppins-SemiBold' }}
+                  style={{ fontSize: hp(2), fontFamily: "Poppins-SemiBold" }}
                   className=" text-neutral-700"
                 >
-                  35
+                  {item.prepTime}
                 </Text>
                 <Text
-                  style={{ fontSize: hp(1.3), fontFamily: 'Poppins-SemiBold'}}
+                  style={{ fontSize: hp(1.3), fontFamily: "Poppins-SemiBold" }}
                   className=" text-neutral-700"
                 >
                   Mins
@@ -162,17 +144,22 @@ const RecipeDetailScreen = (props) => {
                 style={{ height: hp(6.5), width: hp(6.5) }}
                 className="bg-white rounded-full flex items-center justify-center"
               >
-                <Icon name="account-supervisor" size={hp(5)} strokeWidth={2.5} color="#525252" />
+                <Icon
+                  name="account-supervisor"
+                  size={hp(5)}
+                  strokeWidth={2.5}
+                  color="#525252"
+                />
               </View>
               <View className="flex items-center py-2 space-y-1">
                 <Text
-                  style={{ fontSize: hp(2), fontFamily: 'Poppins-SemiBold' }}
+                  style={{ fontSize: hp(2), fontFamily: "Poppins-SemiBold" }}
                   className=" text-neutral-700"
                 >
-                  03
+                  {item.serving}
                 </Text>
                 <Text
-                  style={{ fontSize: hp(1.3), fontFamily: 'Poppins-SemiBold' }}
+                  style={{ fontSize: hp(1.3), fontFamily: "Poppins-SemiBold" }}
                   className=" text-neutral-700"
                 >
                   Servings
@@ -184,17 +171,17 @@ const RecipeDetailScreen = (props) => {
                 style={{ height: hp(6.5), width: hp(6.5) }}
                 className="bg-white rounded-full flex items-center justify-center"
               >
-                <Icon name="fire" size={hp(5)}  color="#525252" />
+                <Icon name="fire" size={hp(5)} color="#525252" />
               </View>
               <View className="flex items-center py-2 space-y-1">
                 <Text
-                  style={{ fontSize: hp(2), fontFamily: 'Poppins-SemiBold' }}
+                  style={{ fontSize: hp(2), fontFamily: "Poppins-SemiBold" }}
                   className=" text-neutral-700"
                 >
-                  103
+                  {item.calori}
                 </Text>
                 <Text
-                  style={{ fontSize: hp(1.3), fontFamily: 'Poppins-SemiBold' }}
+                  style={{ fontSize: hp(1.3), fontFamily: "Poppins-SemiBold" }}
                   className=" text-neutral-700"
                 >
                   Cal
@@ -206,19 +193,14 @@ const RecipeDetailScreen = (props) => {
                 style={{ height: hp(6.5), width: hp(6.5) }}
                 className="bg-white rounded-full flex items-center justify-center"
               >
-                <Icon
-                name="layers-triple"
-                  size={hp(5)}
-                  color="#525252"
-                />
+                <Icon name="layers-triple" size={hp(5)} color="#525252" />
               </View>
               <View className="flex items-center py-2 space-y-1">
-         
                 <Text
-                  style={{ fontSize: hp(1.3), fontFamily: 'Poppins-SemiBold' }}
+                  style={{ fontSize: hp(1.3), fontFamily: "Poppins-SemiBold" }}
                   className=" text-neutral-700"
                 >
-                  Easy
+                  {item.cuisine}
                 </Text>
               </View>
             </View>
@@ -233,33 +215,28 @@ const RecipeDetailScreen = (props) => {
             className="space-y-4"
           >
             <Text
-              style={{ fontSize: hp(2.5), fontFamily: 'Poppins-Bold'}}
+              style={{ fontSize: hp(2.5), fontFamily: "Poppins-Bold" }}
               className=" flex-1 text-neutral-700"
             >
               Ingredients
             </Text>
             <View className="space-y-2 ml-3">
-              {ingredientsIndexes(meal).map((i) => {
+              {ingredientsIndexes(item).map((ingredient, index) => {
                 return (
-                  <View key={i} className="flex-row space-x-4">
+                  <View key={index} className="flex-row space-x-4">
                     <View
                       style={{ height: hp(1.5), width: hp(1.5) }}
                       className="bg-amber-300 rounded-full"
                     />
-                    <View className="flex-row space-x-2">
-                      <Text
-                        style={{ fontSize: hp(1.7), fontFamily: 'Poppins-ExtraBold' }}
-                        className=" text-neutral-700"
-                      >
-                        {meal["strMeasure" + i]}
-                      </Text>
-                      <Text
-                        style={{ fontSize: hp(1.7), fontFamily: 'Poppins-Medium' }}
-                        className=" text-neutral-600"
-                      >
-                        {meal["strIngredient" + i]}
-                      </Text>
-                    </View>
+                    <Text
+                      style={{
+                        fontSize: hp(1.7),
+                        fontFamily: "Poppins-Medium",
+                      }}
+                      className="text-neutral-600"
+                    >
+                      {ingredient}
+                    </Text>
                   </View>
                 );
               })}
@@ -274,18 +251,36 @@ const RecipeDetailScreen = (props) => {
             className="space-y-4"
           >
             <Text
-              style={{ fontSize: hp(2.5), fontFamily: 'Poppins-Bold' }}
+              style={{ fontSize: hp(2.5), fontFamily: "Poppins-Bold" }}
               className=" flex-1 text-neutral-700"
             >
               Instructions
             </Text>
-            <Text style={{ fontSize: hp(1.8), fontFamily: 'Poppins-Medium' }} className="text-neutral-700">
-              {meal?.strInstructions}
-            </Text>
+            <View className="space-y-2 ml-3">
+              {instructionsIndexes(item).map((instruction, index) => {
+                return (
+                  <View key={index} className="flex-row space-x-4">
+                    <View
+                      style={{ height: hp(1.5), width: hp(1.5) }}
+                      className="bg-amber-300 rounded-full"
+                    />
+                    <Text
+                      style={{
+                        fontSize: hp(1.7),
+                        fontFamily: "Poppins-Medium",
+                      }}
+                      className="text-neutral-600"
+                    >
+                      {instruction}
+                    </Text>
+                  </View>
+                );
+              })}
+            </View>
           </Animated.View>
 
           {/* recipe video */}
-          {meal.strYoutube && (
+          {item.strYoutube && (
             <Animated.View
               entering={FadeInDown.delay(400)
                 .duration(700)
@@ -301,7 +296,7 @@ const RecipeDetailScreen = (props) => {
               </Text>
               <View>
                 <YouTubeIframe
-                  videoId={getYoutubeVideoId(meal.strYoutube)}
+                  videoId={getYoutubeVideoId(item.strYoutube)}
                   height={hp(30)}
                 />
               </View>
