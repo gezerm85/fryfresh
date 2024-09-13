@@ -2,8 +2,8 @@ import AppNavigation from "./src/navigation";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
-import { initializeApp } from 'firebase/app'; // Firebase core
-import { getAnalytics } from 'firebase/analytics'; // Firebase Analytics
+import { initializeApp } from "firebase/app"; // Firebase Web SDK
+import { getFirestore } from "firebase/firestore"; // Firestore Web SDK
 
 SplashScreen.preventAutoHideAsync();
 
@@ -40,8 +40,8 @@ export default function App() {
     const initializeFirebase = () => {
       try {
         const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app); // Initialize Firebase Analytics
-        console.log("Firebase Analytics initialized successfully");
+        const firestore = getFirestore(app); // Initialize Firestore
+        console.log("Firebase and Firestore initialized successfully");
       } catch (error) {
         console.error("Firebase initialization error:", error);
       }

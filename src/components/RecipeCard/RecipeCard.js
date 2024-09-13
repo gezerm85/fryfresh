@@ -39,7 +39,7 @@ const RecipeCard = ({ item, index, navigation }) => {
           }}
         >
           <CachedImage
-            uri={item.strMealThumb}
+            uri={item.image}
             style={{
               width: "100%",
               height: "100%",
@@ -47,7 +47,7 @@ const RecipeCard = ({ item, index, navigation }) => {
               resizeMode: "cover",
             }}
             className="bg-black/5"
-            sharedTransitionTag={item.strMeal}
+            sharedTransitionTag={item.image}
           />
         </View>
         <View style={{  width: '100%', height: '20%', alignItems: 'center', justifyContent: 'center'}}>
@@ -59,9 +59,9 @@ const RecipeCard = ({ item, index, navigation }) => {
             }}
             className=" text-neutral-600"
           >
-            {item.strMeal.length > 20
-              ? item.strMeal.slice(0, 20) + "..."
-              : item.strMeal}
+            {item.name.length > 20
+              ? item.name.slice(0, 20) + "..."
+              : item.name}
           </Text>
         </View>
       </Pressable>
