@@ -9,7 +9,7 @@
 [![Firebase](https://img.shields.io/badge/Firebase-10.13.1-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.3.2-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
-[📱 Demo](#-demo) • [📋 Özellikler](#-özellikler) • [🛠️ Teknolojiler](#️-teknolojiler) • [🚀 Kurulum](#-kurulum) • [📱 Ekran Görüntüleri](#-ekran-görüntüleri)
+[📱 Demo](#-demo) • [📋 Özellikler](#-özellikler) • [🛠️ Teknolojiler](#️-teknolojiler) • [🚀 Kurulum](#-kurulum) 
 
 </div>
 
@@ -215,21 +215,9 @@ fryfresh/
 └── package.json         # Proje bağımlılıkları
 ```
 
----
 
-## 📱 Ekran Görüntüleri
 
-<div align="center">
 
-| Hoş Geldin | Ana Sayfa | Tarif Detayı |
-|:---:|:---:|:---:|
-| ![Welcome](src/assets/images/welcome-preview.png) | ![Home](src/assets/images/home-preview.png) | ![Recipe Detail](src/assets/images/recipe-detail-preview.png) |
-
-| Kategoriler | Favoriler | Arama |
-|:---:|:---:|:---:|
-| ![Categories](src/assets/images/categories-preview.png) | ![Favorites](src/assets/images/favorites-preview.png) | ![Search](src/assets/images/search-preview.png) |
-
-</div>
 
 ---
 
